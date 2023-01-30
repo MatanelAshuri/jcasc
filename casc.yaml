@@ -113,7 +113,7 @@ jobs:
       pipelineJob('Pipeline 3') {
         logRotator(5, 1)
         parameters {
-            stringParam("build_number", "<num>", "enter the build number you want to destroy")
+            stringParam("build_number", "<num>", "enter the build number you want to destroy (digit)")
           }
         definition {
           cpsScm {
