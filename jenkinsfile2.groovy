@@ -7,7 +7,7 @@ pipeline {
                     sh "mkdir /var/n_instances/${BUILD_NUMBER}"     
                     sh "cp /var/n_instances/highest /var/n_instances/${BUILD_NUMBER}"
                     sh "cp /var/n_instances/p2tf.tf /var/n_instances/${BUILD_NUMBER}"
-                    sh "cd /var/n_instances/${BUILD_NUMBER} && terraform init"
+                    sh "cd /var/n_instances/${BUILD_NUMBER} && terraform init && terraform plan"
                     sh "terraform apply -auto-approve"
                     archiveArtifacts artifacts: '/var/n_instances/${BUILD_NUMBER}/p2m-key'
                 }
