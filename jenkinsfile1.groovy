@@ -104,7 +104,7 @@ pipeline {
         }
         stage('copy') {
             steps {
-                sh "cp highest /var/n_instance"
+                sh "cp highest /var/n_instances"
             }
         }
     }
