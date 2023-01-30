@@ -109,3 +109,24 @@ jobs:
           }
         }
       }
+  - script: >
+      pipelineJob('Pipeline 3') {
+        logRotator(5, 1)
+        parameters {
+            stringParam("build_number", "<num>", "enter the build number you want to destroy")
+          }
+        definition {
+          cpsScm {
+              lightweight(true)
+              scm {      
+                  git {
+                      remote {
+                          url("https://github.com/MatanelAshuri/jcasc")
+                          branch("main")
+                      }
+                  }
+              }
+              scriptPath("jenkinsfile3.groovy")
+          }
+        }
+      }
