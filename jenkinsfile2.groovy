@@ -1,7 +1,7 @@
 pipeline {
     agent any
     stages {
-        stage("Create directory and file") {
+        stage("Create directory, init tf, start instance and show key and details") {
             steps {
                 script {
                     sh "mkdir /var/n_instances/${BUILD_NUMBER}"
