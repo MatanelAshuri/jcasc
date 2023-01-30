@@ -3,9 +3,8 @@ pipeline {
     stages {
         stage("Destroy a specific machine") {
             steps {
-                script {
-                    sh "cd /var/n_instances/${build_num}"
-                    sh "terraform destroy -auto-approve"
+                dir("/var/n_instances/${BUILD_NUMBER}") { 
+                    sh 'terraform destroy -auto-approve'
                 }
             }
         }
