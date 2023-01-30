@@ -1,0 +1,111 @@
+jenkins:
+  agentProtocols:
+  - "JNLP4-connect"
+  - "Ping"
+  crumbIssuer:
+    standard:
+      excludeClientIPFromCrumb: false
+  disableRememberMe: false
+  labelAtoms:
+  - name: "a1"
+  - name: "built-in"
+  labelString: "a1"
+  markupFormatter: "plainText"
+  mode: NORMAL
+  myViewsTabBar: "standard"
+  numExecutors: 10
+  primaryView:
+    all:
+      name: "all"
+  projectNamingStrategy: "standard"
+  quietPeriod: 5
+  remotingSecurity:
+    enabled: true
+  scmCheckoutRetryCount: 0
+  slaveAgentPort: 50000
+  updateCenter:
+    sites:
+    - id: "default"
+      url: "https://updates.jenkins.io/update-center.json"
+  views:
+  - all:
+      name: "all"
+  viewsTabBar: "standard"
+globalCredentialsConfiguration:
+  configuration:
+    providerFilter: "none"
+    typeFilter: "none"
+security:
+  apiToken:
+    creationOfLegacyTokenEnabled: false
+    tokenGenerationOnCreationEnabled: false
+    usageStatisticsEnabled: true
+  gitHostKeyVerificationConfiguration:
+    sshHostKeyVerificationStrategy: "knownHostsFileVerificationStrategy"
+  sSHD:
+    port: -1
+unclassified:
+  buildDiscarders:
+    configuredBuildDiscarders:
+    - "jobBuildDiscarder"
+  fingerprints:
+    fingerprintCleanupDisabled: false
+    storage: "file"
+  injectionConfig:
+    allowUntrusted: false
+    enabled: false
+    injectCcudExtension: false
+    injectMavenExtension: false
+  location:
+    adminAddress: "address not configured yet <nobody@nowhere>"
+  mailer:
+    charset: "UTF-8"
+    useSsl: false
+    useTls: false
+  pollSCM:
+    pollingThreadCount: 10
+tool:
+  git:
+    installations:
+    - home: "git"
+      name: "Default"
+  mavenGlobalConfig:
+    globalSettingsProvider: "standard"
+    settingsProvider: "standard"
+jobs:
+  - script: >
+      pipelineJob('Pipeline 1') {
+        logRotator(5, 1)
+        definition {
+          cpsScm {
+              lightweight(true)
+              scm {      
+                  git {
+                      remote {
+                          url("https://github.com/MatanelAshuri/jcasc")
+                          branch("main")
+                      }
+                  }
+              }
+              scriptPath("jenkinsfile1.groovy")
+          }
+        }
+      }
+  - script: >
+      pipelineJob('Pipeline 2') {
+        logRotator(5, 1)
+        definition {
+          cpsScm {
+              lightweight(true)
+              scm {      
+                  git {
+                      remote {
+                          url("https://github.com/MatanelAshuri/jcasc")
+                          branch("main")
+                      }
+                  }
+              }
+              scriptPath("jenkinsfile2.groovy")
+          }
+        }
+      }
